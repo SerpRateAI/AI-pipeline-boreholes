@@ -98,15 +98,15 @@ For the filters codes, please refer to the [Gaussian Filter](Filters.py) and [Ed
 skimage.measure.label(binary_mask,connectivity=connectivity, return_num=True)
 skimage.measure.regionprops(image)
 ```
-Refer the the [Component Analysis](Component analysis single.py) file for the code leading to this process.
+Refer the the [Component Analysis](Component_analysis.py) file for the code leading to this process.
 - to improve the visibility of your results, you can display the segmentation on top of the raw images, with the module *skimage.color.label2rgb*. 
 ```
 skimage.color.label2rgb(segmentation_map, colors=color_list, alpha=alpha, image=raw_image, saturation=saturation, bg_label=0, bg_color=None)
 ```
-An example of its use is presented on the [Component Analysis](Component analysis single.py) code.
+An example of its use is presented on the [Component Analysis](Component_analysis.py) code.
 - you can perform a Principal Component Analysis to know what's the feature with the higher importance in your detection, and then choose to keep only these features for the training of your model (work in progress !)
 
-- finally, I presented the results with a graph of the percentage of fractures per depth, using *skimage.measure.regionprops* to calculate the total area of fractures in all the pictures. The code leading to the graph is on the *"all_depth_graph.py"* file.
+- finally, I presented the results with a graph of the percentage of fractures per depth, using *skimage.measure.regionprops* to calculate the total area of fractures in all the pictures. The code leading to the graph is on the [Depth graphs](all_depth_graph.py) file.
 
 ## **Method used**
 I made several model training with different parameters; here are some of the options that gave interesting results:
