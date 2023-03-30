@@ -93,7 +93,7 @@ skimage.filters.roberts(image)
 skimage.filters.sobel(image)
 ```
 For the filters codes, please refer to the [Gaussian Filter](Gaussian_filters.py) and [Edge Enhancement Filters](Edge_filters.py) files.
-- to "denoise" your results, and make sure only the objects wanted are detected, you can perform a connected component analysis with *"skimage.measure.label"* and then use the module *skimage.measure.regionprops* to remove the smaller object detected. This suppose a high connectivity between the objects you really want to be detected.
+- to "denoise" your results, and make sure only the wanted objects are detected, you can perform a connected component analysis with *"skimage.measure.label"* and then use the module *skimage.measure.regionprops* to remove the smaller object detected. This suppose a high connectivity between the objects you really want to be detected.
 ```
 skimage.measure.label(binary_mask,connectivity=connectivity, return_num=True)
 skimage.measure.regionprops(image)
