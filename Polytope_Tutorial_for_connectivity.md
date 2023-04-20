@@ -10,8 +10,8 @@ The main notebook to use is the [Polytope  for segmented images](Connectivity/Py
 To have an idea of the connectivity of our segmented images, we can use *n-point correlation functions*. These functions determine the probabilities fro several points to be linked by a polytope, which is a geometric figure with a large number of symmetries. Here are the Polytope functions used in this code:
   - the S2(r) function calculate the probability for 2 points of distance r to be in the same region. 
   - the L(r) function calculates the probability for a line of length r to occur entirely in the same region.
-  - the P3V(r) and P3H(r) calculates the probabilities for 3 points forming respectively equilateral vertical triangle and equilateral horizontal triangle woth vertice of length r to occur in the same region.
-  - and so on, P4(r) and P6(r) calculates the probabilities for 4 and 6 points forming square and hexagon of vertice lentgh r to occur in the same region...
+  - the P3V(r) and P3H(r) calculates the probabilities for 3 points forming respectively equilateral vertical triangle and equilateral horizontal triangle with edges of length r to occur in the same region.
+  - and so on, P4(r) and P6(r) calculates the probabilities for 4 and 6 points forming square and hexagon of edges lentgh r to occur in the same region...
 
 All these probabilities are calculated for different r byt the Pn function in this code. The Fn function normalize those probabilities such as Fn(0) is always 1, and Fn tends towards 0 when r tends towards infinity. These two functions caracterize the same thing: an idea of connectivity among microstructures. Thus they should have the same tendencies.
 
