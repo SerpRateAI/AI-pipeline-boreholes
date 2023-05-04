@@ -48,12 +48,15 @@ Vein features comments on the type of rocks from the section, made by the drilli
 Alteration comments on the type of rocks from the section, made by the drilling analysis team: where the alteration occurs, how it manifests.  Information given only for the last cores.
 
 ## **Unit Type**
-The lithological type of rocks in each section. That's basically the answer to "What rock is this ?". Given by the public data.
+The lithological type of rocks in each section. That's basically the answer to "What rock is this ?". Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
 ## **Unit Class**
-The lithological class of rocks in each section. Class includes several rock types. For example ophiolite are a group of litospheric rocks. It can include gabbro, dunites... Und stands for Undefined (?). Given by the public data.
+The lithological class of rocks in each section. Class includes several rock types. For example ophiolite are a group of litospheric rocks. It can include gabbro, dunites... Und stands for Undefined (?). Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
+
 
 ## **Texture**
-More information about what 
+More informations about how the rocks are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
+
 
 ## **Grainsize**
+Informations about the grain size of each section: grain size is the average diameter of particles composing the sediments. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
