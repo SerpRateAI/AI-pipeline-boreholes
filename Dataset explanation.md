@@ -1,5 +1,5 @@
 # **Dataset explanation**
-Here are described the different items present in the dataset BA1B: what they represent, where they come from, or some general information.
+Here are described the different items present in the [dataset BA1B](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Dataset_BA1B.xlsx): what they represent, where they come from, or some general information. This dataset will be helpful to create a predictive model.
 
 ## **Core**
 The drilling bore is split in 142 cores, from the highest to the lowest in depth. Each core is approximately 3 meters deeper than the previous one. Given by the drilling team.
@@ -11,6 +11,7 @@ Each core is split in several section, with between 1 and 4 section for each, fr
 ULtimately, each section can include several subsections, however images are linked with section, and are the same between two subsections of the same section. Given by the drilling team.
 
 ## **% of fractures**
+Once we've made the segmentation of our pictures, we can access the percentage of cracks for each section. For this, we used skimage in [this code](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Graph%20per%20depth/all_depth_graph.py) that gives the graph of percentage of cracks for each depth. We'll then use those statistics to build a predictive model of when/where cracks will occur.
 
 ## **Images**
 The images that form the base of our segmentation are taken from the [Oman project public data](https://www.icdp-online.org/projects/by-continent/asia/oodp-oman/public-data-2). Those are vertical cuts of each section of each core, and the data we used to make our segmentation and our prediction of the % of fractures.
@@ -53,10 +54,8 @@ The lithological type of rocks in each section. That's basically the answer to "
 ## **Unit Class**
 The lithological class of rocks in each section. Class includes several rock types. For example ophiolite are a group of litospheric rocks. It can include gabbro, dunites... Und stands for Undefined (?). Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
-
 ## **Texture**
 More informations about how the rocks are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
-
 ## **Grainsize**
-Informations about the grain size of each section: grain size is the average diameter of particles composing the sediments. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
+Informations about the grain size of each section: grain size is the average diameter of particles composing the sediments. Cryptocrystalline: several μm, barely visible under the microscope. Fine grained: less than 0.075 mm. Coarse grained: between 80 mm to 0.075 mm. Medium grained: from 1 to 5 mm. Microcrystalline: several to 200 μm, visible only through the microscope. Pegmatitic: > 1cm. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
