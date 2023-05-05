@@ -8,16 +8,16 @@ The drilling bore is split in 142 cores, from the highest to the lowest in depth
 Each core is split in several section, with between 1 and 4 section for each, from the highest to the lowest in depth. Given by the drilling team.
 
 ## **Section Unit**
-ULtimately, each section can include several subsections, however images are linked with section, and are the same between two subsections of the same section. Given by the drilling team.
+ULtimately, each section can include several subsections. However, images are linked with section, and are the same between two subsections of the same section. Given by the drilling team.
 
 ## **% of fractures**
-Once we've made the segmentation of our pictures, we can access the percentage of cracks for each section. For this, we used skimage in [this code](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Graph%20per%20depth/all_depth_graph.py) that gives the graph of percentage of cracks for each depth. We'll then use those statistics to build a predictive model of when/where cracks will occur.
+Once we've made the segmentation of our pictures, we can access the percentage of cracks for each section. For this, we used skimage in [this code](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Graph%20per%20depth/all_depth_graph.py) that gives the graph of percentage of cracks for each depth. We did it for several takes: the sheer segmentation issued from ilastik, plus with smaller object or less eccentric object removed in an attempt to reduce noise in the background. The final percentage is the mean of these different takes. We'll then use those statistics to build a predictive model of when/where cracks will occur.
 
 ## **Images**
-The images that form the base of our segmentation are taken from the [Oman project public data](https://www.icdp-online.org/projects/by-continent/asia/oodp-oman/public-data-2). Those are vertical cuts of each section of each core, and the data we used to make our segmentation and our prediction of the % of fractures.
+The images that form the base of our segmentation are taken from the [Oman project public data](https://www.icdp-online.org/projects/by-continent/asia/oodp-oman/public-data-2). Those are vertical cuts of each section of each core of the drilling bore BA1B, and are the data we used to make our segmentation and our prediction of the % of fractures.
 
 ## **Segmentation**
-To segment our images, we used the software [ilastik](ilastik.org). The whole process is detailed in the [read me](README.md). We took several shot at the segmentation to keep the one that seems to fit the best to the cracks. 
+To segment our images, we used the software [ilastik](ilastik.org). The goal is to extract the cracks for the base images, to then deduce what conditions favorise the cracking. The whole process is detailed in the [read me](README.md). We took several shot at the segmentation to keep the one that seems to fit the best to the cracks. 
 
 ## **Top depth**
 For each section, gives the depth of the top of the section in meters. The drilling bore goes down to 400 meters. Given by the public data.
@@ -26,10 +26,10 @@ For each section, gives the depth of the top of the section in meters. The drill
 Structural comments on the  rocks from the section, made by the drilling analysis team: breccia, slickenslides...Those are rock formations created by movments (as friction for example).  Information only for the last cores.
 
 ## **Vein Intensity**
-Veins are leaflike structures composed of crystallized minerals, that usually form when mineral are carried by water (or any solution) into the rock. The vein intensity gives a rough idea of the amount of vein in each section. The values goes from 0 to 4, 4 representing a section with a lot of vein. We easily remark there are more veins in the higher section. Warning: data missing for some section (value -999,25 ?).
+Veins are leaflike structures composed of crystallized minerals, that usually form when mineral are carried by water (or any solution) into the rock. The vein intensity gives a rough idea of the amount of vein in each section. The values goes from 0 to 4, 4 representing a section with a lot of vein. We easily remark there are more veins in the higher section, which is confirmed by our % of cracks calculation. Warning: data missing for some section (value -999,25 ?).
 
 ## **Alteration**
-The alteration conists of a change in the properties of rocks and minerals due to various geological processes (weathering, hydrothermal activity...). This value gives the grade of alteration for each section. The top section are much more altered than the bottom one, we can imagine it's due a better exposition to the surface.
+The alteration conists of a change in the properties of rocks and minerals due to various geological processes (weathering, hydrothermal activity...). This value gives the grade of alteration for each section. The top section are much more altered than the bottom one, we can imagine it's due a better exposition to the surface. Given by the drilling team.
 
 ## **Remarks**
 Remarks 1: remarks from geologists concerning vein intensity for each core: shape of vein, type of minerals, size... To be treated.
