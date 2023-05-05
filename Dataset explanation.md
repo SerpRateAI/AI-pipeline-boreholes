@@ -1,5 +1,5 @@
 # **Dataset explanation**
-Here are described the different items present in the [dataset BA1B](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Dataset_BA1B.xlsx): what they represent, where they come from, or some general information. This dataset will be helpful to create a predictive model.
+Here are described the different items present in the [dataset BA1B](https://github.com/SerpRateAI/core-photo-analysis/blob/ac5f9570f762d1f674059cee57904d1cbdb46138/Dataset_BA1B.xlsx): what they represent, where they come from, or some general information. This dataset will be helpful to create a predictive model. A lot of the data come from the [public data of the Oman project](https://data.icdp-online.org/sites/oman/internal/2367Fc0/5057_OMAN_5_B_SECTION_UNITS.TXT).
 
 ## **Core**
 The drilling bore is split in 142 cores, from the highest to the lowest in depth. Each core is approximately 3 meters deeper than the previous one. Given by the drilling team.
@@ -20,10 +20,10 @@ The images that form the base of our segmentation are taken from the [Oman proje
 To segment our images, we used the software [ilastik](ilastik.org). The goal is to extract the cracks for the base images, to then deduce what conditions favorise the cracking. The whole process is detailed in the [read me](README.md). We took several shot at the segmentation to keep the one that seems to fit the best to the cracks. 
 
 ## **Top depth**
-For each section, gives the depth of the top of the section in meters. The drilling bore goes down to 400 meters. Given by the public data.
+For each section, gives the depth of the top of the section in meters. The drilling bore goes down to 400 meters, for roughly 3 meters by core. Given by the public data.
 
 ## **Unit Desc 4**
-Structural comments on the  rocks from the section, made by the drilling analysis team: breccia, slickenslides...Those are rock formations created by movments (as friction for example).  Information only for the last cores.
+Structural comments on the  rocks from the section, made by the drilling analysis team: breccia, slickenslides...Those are rock formations created by movments (as friction for example).  Information only for the last cores. Redondant with remarks ?
 
 ## **Vein Intensity**
 Veins are leaflike structures composed of crystallized minerals, that usually form when mineral are carried by water (or any solution) into the rock. The vein intensity gives a rough idea of the amount of vein in each section. The values goes from 0 to 4, 4 representing a section with a lot of vein. We easily remark there are more veins in the higher section, which is confirmed by our % of cracks calculation. Warning: data missing for some section (value -999,25 ?).
@@ -43,10 +43,10 @@ Remarks 5: remarks from geologists concerning alteration intensity for each core
 The remarks often overlap, say twice the same thing or give simultaneous information. To be considered as a whole.
 
 ## **Unit Desc 5**
-Vein features comments on the type of rocks from the section, made by the drilling analysis team: type of cutting, type of networks, direction, colors...  Information given only for the last cores.
+Vein features comments on the type of rocks from the section, made by the drilling analysis team: type of cutting, type of networks, direction, colors...  Information given only for the last cores. Redondant with remarks ?
 
 ## **Unit Desc 3**
-Alteration comments on the type of rocks from the section, made by the drilling analysis team: where the alteration occurs, how it manifests.  Information given only for the last cores.
+Alteration comments on the type of rocks from the section, made by the drilling analysis team: where the alteration occurs, how it manifests.  Information given only for the last cores. Redondant with remarks ?
 
 ## **Unit Type**
 The lithological type of rocks in each section. That's basically the answer to "What rock is this ?". Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
@@ -55,7 +55,7 @@ The lithological type of rocks in each section. That's basically the answer to "
 The lithological class of rocks in each section. Class includes several rock types. For example ophiolite are a group of litospheric rocks. It can include gabbro, dunites... Und stands for Undefined (?). Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
 ## **Texture**
-More informations about how the rocks are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
+More informations about how the rocks formation are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
 ## **Grainsize**
 Informations about the grain size of each section: grain size is the average diameter of particles composing the sediments. Cryptocrystalline: several μm, barely visible under the microscope. Fine grained: less than 0.075 mm. Coarse grained: between 80 mm to 0.075 mm. Medium grained: from 1 to 5 mm. Microcrystalline: several to 200 μm, visible only through the microscope. Pegmatitic: > 1cm. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
