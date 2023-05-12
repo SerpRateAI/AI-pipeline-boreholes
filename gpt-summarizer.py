@@ -50,7 +50,7 @@ if __name__=='__main__':
     text_summary = []
 
     for n, row in enumerate(df.iterrows()):
-        print('analysing row {n}'.format(n=n)
+        print('analysing row {n}'.format(n=n))
         remarks = row[1]['REMARKS_ALL']
         summed = summarize(remarks)
         text_summary.append(summed)
