@@ -55,7 +55,7 @@ The lithological type of rocks in each section. That's basically the answer to "
 The lithological class of rocks in each section. Class includes several rock types. For example ophiolite are a group of litospheric rocks. It can include gabbro, dunites... Und stands for Undefined (?). Given by the public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
 ## **Texture**
-More informations about how the rocks formation are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
+More information about how the rocks formation are arranged: are those a result of a shearing ? A compaction ? Given by public data. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
 
 ## **Grainsize**
 Informations about the grain size of each section: grain size is the average diameter of particles composing the sediments. Cryptocrystalline: several μm, barely visible under the microscope. Fine grained: less than 0.075 mm. Coarse grained: between 80 mm to 0.075 mm. Medium grained: from 1 to 5 mm. Microcrystalline: several to 200 μm, visible only through the microscope. Pegmatitic: > 1cm. This data is split using panda.get_dummies to draw several columns out of it, with boolean variable for each values possible.
