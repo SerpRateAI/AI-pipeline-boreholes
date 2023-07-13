@@ -1,4 +1,4 @@
-# **Explanation on construction and interpretation of figure**
+# **Explanation on construction and interpretation of figures**
 
 ## *Physical data graphs per depth*
 
@@ -98,5 +98,99 @@ This first analysis establish a correlation between some of the keywords and dep
 
 Here is the code used for plotting such a graph:
 ```
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import pandas as pd
+import openpyxl
+
+df = pd.read_excel("D:\SerpRateAI\Datasets\Dataset_BA1B.xlsx")
+
+keywords=df.columns[49:]
+K=[]
+for i in keywords:
+    K.append(i)
+
+fname = "D:\SerpRateAI\Datasets\Dataset_BA1B_Final.xlsx"
+wb = openpyxl.load_workbook(fname)
+sheet = wb.get_sheet_by_name('Sheet1')
+
+L=[]
+for rowOfCellObjects in sheet['G2':'G656']:
+    for cellObj in rowOfCellObjects:
+        L.append(cellObj.value)
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+
+data = df[K].to_numpy()
+row_labels = L
+col_labels = K
+
+groups = [
+    ['Veins', 'Serpentine vein', 'Carbonate veins', 'White veins', 'Green veins',
+     'Blue patches', 'Magmatic veins', 'Dark green', 'Magmatic intrusions',
+     'Hydrothermal', 'Offsets', 'Rodingite'],
+    ['Oxidation', 'Black serpentinization', 'Alteration', 'Alteration halo',
+     'Altered gabbro', 'Altered', 'Pyroxenite'],
+    ['Network', 'Coalescence', 'Dyke', 'Shearing', 'Crack',  'Open cracks', 'Open crack', 'Irregular', 'Subvertical',
+     'Subhorizontal', 'Lineation', 'Thickness', 'Offset', 'Fracture',
+     'Sheared', 'Striations', 'Branching', 'Slickensides'],
+    ['Dunite', 'Gabbro', 'Microgabbro', 'Harzburgite', 'Pxenites', 'Dunitic zone','Magnetite'],
+    ['Plagioclase', 'Microbio sample', 'Bulk serp', 'Bulk'],
+    ['Fine grained', 'Waxy green', 'Waxy', 'Wavy']
+]
+
+colors = ['red', 'blue', 'green', 'purple', 'orange', 'grey']
+
+
+sorted_cols = []
+group_indices = []
+for i, group in enumerate(groups):
+    for col in col_labels:
+        if col in group:
+            sorted_cols.append(col)
+            group_indices.append(i)
+
+sorted_data = data[:, [col_labels.index(col) for col in sorted_cols]]
+
+plt.pcolormesh(sorted_data, cmap='Purples')
+
+y_ticks = np.arange(0, 401.7, 100)
+y_tick_positions = np.linspace(0, len(row_labels), len(y_ticks))
+plt.yticks(y_tick_positions, y_ticks)
+
+plt.xticks(np.arange(len(sorted_cols)) + 0.5, sorted_cols, rotation=45, ha="right", rotation_mode="anchor", fontsize=8)
+plt.subplots_adjust(bottom=0.1)
+
+for tick_label in plt.gca().get_xticklabels():
+    label = tick_label.get_text()
+    for i, group in enumerate(groups):
+        if label in group:
+            tick_label.set_color(colors[i])
+
+plt.gca().invert_yaxis()
+
+plt.xlabel("Columns")
+
+plt.show()
 
 ```
+
+## *ROC curves and R2 score table*
+
+This graph was made by plotting the ROC curve for different subsets of features depending on their origin (physical, textual or image-extracted data), indicated in the legend. ROC curves compute True positive and False positive detection to provide an insight at a model’s performance. The more expanded the area under the ROC curve is, the better the model is. The point is to compare the performance of the model when it is given only data treated by AI tools and data issued from physical measurements
+
+With all of the features excluding depth, our model function very well and reach an area under the ROC curve (ROC AUC) of 0.9881. 
+
+If the physical data are cut out, and so only images and textual data that has been treated using artificial intelligence (Ilastik and ChatGPT) remain, the model shows an ROC AUC of 0.9547, and is still successful. 
+
+It's worth mentioning using only physical measurements results in an ROC AUC of 0.94077. This means we got to recreate a comparable results with AI tools than the one obtained by physical measurements, and it justifies an AI-oriented approach for the treatment of geological data.
+
+Using only textual data results in an ROC AUC of 0.9498; this subset of data is sufficient on its own and shows satisfying results. The extraction of keywords by ChatGPT proves to be powerful, and can be slightly improved by the addition of physical or images data.
+
+Finally, if only the images-extracted data remain, i.e. the percentage of fractures and n-points correlation functions, the ROC AUC falls at 0.8118. This value is lower compared with other subsets, but is still acceptable given only 13 features are available. This result may be improved by a better segmentation or a better use of n-point correlation functions' curves, but it already shows promising result for a detection based only on fracture-related data. 
+
+To try and build a better machine learning model out of our dataset, we also got interested in the use of a regressive XGBoost model. This model should then predict the value of bulk density for each sample. We ran this model with the same multiple subsets of data, and for each calculated the R2 score (an estimation on how accurately the model approach real points, the maximum value for a perfect detection being 1) of the model. The table computes those scores. Regressive model seems way less performant than the classification,  which is due to the additional complexity of the task. The data issued from AI treatment can't compete with physical data is this model: the corresponding features could be better exploited, by a better segmentation labelling or a more clever integration of connectivity estimation.
+
+
