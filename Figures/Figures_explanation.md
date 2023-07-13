@@ -1,5 +1,10 @@
 # **Explanation on construction and interpretation of figures**
 
+## *Workflow overview*
+
+![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/47ebfdba-0806-4203-a2f4-c5914faeddb2)
+
+
 ## *Physical data graphs per depth*
 
 ![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/944b4865-dba4-47d1-84d6-fe1c1a5b062e)
