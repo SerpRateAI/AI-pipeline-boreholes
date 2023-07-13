@@ -2,6 +2,10 @@
 
 ## *Physical data graphs per depth*
 
+![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/944b4865-dba4-47d1-84d6-fe1c1a5b062e)
+
+
+
 The first essential piece of data to acquire is the degree of fracturing in the core at any given depth, enabling the establishment of a correlation between depth and the amount of fractures. The previous application of a connected component analysis permitted a straightforward calculation of the fractures total area using the skimage.measure module, which led to the desired percentage of fractures once divided by the total area of the image.
 
 Calculation of the percentage of fractures have been made for three different takes of the segmentation 3: the raw segmentation, the segmentation with area filter, and the segmentation with eccentricity filter.  In the end, the variations in filters used have negligible impact on the results, as the curves share similar trends with a translation shift. Thus only a rolling mean of these three takes have been studied.
@@ -73,9 +77,15 @@ ax.set_xlabel('Bulk density (g/cm³)')
 
 ax.scatter(x,y)
 ```
+
+![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/37f9271e-ff84-4c92-be08-477842871274)
+
 An interesting observation is the non apparent connection of data such as bulk density with depth; however, it is proven useful for the alteration prediction by the classification model. This outlines the classification relies on multiple features, and doesn't only try to predict depth.
 
 ## *Keywords graph*
+
+![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/8004e1b0-0db1-4ebc-b621-ac183d31d4d1)
+
 
 The remarks from geologists were covered by ChatGPT, which then extracted 10 relevant keywords for each of the 505 images. Following the keywords extraction, only the ones with multiple occurrences were retained, and the keywords with overlapping meaning were fused. The total number resulting keywords is of 55, and each of the core section is assigned 55 binary variables, being 1 if it possesses the feature described by the keyword, 0 if it does not.
 
@@ -178,6 +188,9 @@ plt.show()
 ```
 
 ## *ROC curves and R2 score table*
+
+![image](https://github.com/SerpRateAI/core-photo-analysis/assets/94477034/7664d206-96a5-414e-a916-afb029aef2d9)
+
 
 This graph was made by plotting the ROC curve for different subsets of features depending on their origin (physical, textual or image-extracted data), indicated in the legend. ROC curves compute True positive and False positive detection to provide an insight at a model’s performance. The more expanded the area under the ROC curve is, the better the model is. The point is to compare the performance of the model when it is given only data treated by AI tools and data issued from physical measurements
 
