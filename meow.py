@@ -253,6 +253,7 @@ def meow_reg(df, X_cols, Y_col):
     print('\n')
     return catboost_reg
 
+
 if __name__=='__main__':
 
     print(xvars)
@@ -417,5 +418,32 @@ if __name__=='__main__':
      'Y (luminance)']
     print('---catboost for other---')
     oth = meow_reg(df=df, X_cols=other, Y_col='Bulk density (g/cm³)')
+
+    models = [cb, frac, geo, phys, gpt, oth]
+    vars = [chemistry_biology, fractures, geology, physics, chatgpt, other]
+
+    print('plotting residuals')
+    import matplotlib.pyplot as plt
+    
+    fig, ax = plt.subplots(1, len(models), figsize=(5*len(models), 5), sharex=True, sharey=True)
+    
+    ax[0].set_ylabel('Predicted Bulk Density')
+    for a in ax:
+        a.set_xlabel('True Bulk Density')
+    ax[0].set_title('Chemistry and Biology')
+    ax[1].set_title('Fractures')
+    ax[2].set_title('Geology')
+    ax[3].set_title('Physics')
+    ax[4].set_title('ChatGPT')
+    ax[5].set_title('Other')
+    
+    ytrue = df['Bulk density (g/cm³)'].values
+    
+    for n, a in enumerate(ax):
+        ypred = models[n].predict(df[vars[n]])
+        a.scatter(ytrue, ypred)
+    
+    fig.tight_layout()
+    fig.savefig('residuals.pdf', bbox_inches='tight')
 
     
