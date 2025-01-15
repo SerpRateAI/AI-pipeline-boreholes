@@ -2,9 +2,9 @@
 This file runs all of the catboost models in the pipeline
 """
 
-from catboost import CatBoostClassifier
+from catboost import CatBoostRegressor, Pool
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
-import sklearn.metrics as metrics
 import pandas as pd
 
 xvars = ['Cell abundance (cells/g)',
@@ -153,6 +153,58 @@ textural = ['TEXTURES_Brecciated', 'TEXTURES_Sheared', 'GRAINSIZE_Cryptocrystall
 
 color_viz = ['Redness', 'Greenness', 'Blueness', 'Y (luminance)']
 
+chatgpt = [ 'Veins',
+ 'Serpentine vein',
+ 'Oxidation',
+ 'Carbonate veins',
+ 'Network',
+ 'Dyke',
+ 'Black serpentinization',
+ 'White veins',
+ 'Open cracks',
+ 'Dunite',
+ 'Gabbro',
+ 'Microgabbro',
+ 'Green veins',
+ 'Open crack',
+ 'Irregular',
+ 'Waxy green',
+ 'Alteration',
+ 'Subvertical',
+ 'Fine grained',
+ 'Subhorizontal',
+ 'Lineation',
+ 'Magnetite',
+ 'Thickness',
+ 'Harzburgite',
+ 'Altered gabbro',
+ 'Offset',
+ 'Altered',
+ 'Crack',
+ 'Pxenites',
+ 'Microbio sample',
+ 'Bulk serp',
+ 'Bulk',
+ 'Coalescence',
+           'Waxy',
+ 'Wavy',
+ 'Slickensides',
+ 'Alteration halo',
+ 'Plagioclase',
+ 'Fracture',
+ 'Sheared',
+ 'Pyroxenite',
+ 'Striations',
+ 'Branching',
+ 'Blue patches',
+ 'Magmatic intrusions',
+ 'Hydrothermal',
+ 'Rodingite',
+ 'Magmatic veins',
+ 'Offsets',
+ 'Shearing',
+ 'Dark green',
+ 'Dunitic zone',]
 
 def import_dataset():
     dataset_path = 'Datasets/Dataset_BA1B.xlsx'
@@ -168,13 +220,13 @@ def import_dataset():
     'TOP_DEPTH'
                       ]
     df.dropna(subset='TOP_DEPTH', inplace=True)
+    return df
 
 def meow_reg(df, X_cols, Y_col):
     """
     trains catboost regressor for data 
     """
-    from catboost import CatBoostRegressor, Pool
-    from sklearn.metrics import mean_squared_error, r2_score
+    # print(X_cols)
 
     X = df[X_cols]
     y = df[Y_col]
@@ -203,8 +255,9 @@ def meow_reg(df, X_cols, Y_col):
 
 if __name__=='__main__':
 
-    
+    print(xvars)
     df = import_dataset()
+    # print(df.head())
     print('-------- everything --------')
     meow_reg(df=df, X_cols=xvars, Y_col='Bulk density (g/cm³)')
 
