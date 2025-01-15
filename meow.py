@@ -253,8 +253,6 @@ def meow_reg(df, X_cols, Y_col):
     print('\n')
     return catboost_reg
 
-def plot_residuals(df):
-    
 
 if __name__=='__main__':
 
@@ -424,6 +422,7 @@ if __name__=='__main__':
     models = [cb, frac, geo, phys, gpt, oth]
     vars = [chemistry_biology, fractures, geology, physics, chatgpt, other]
 
+    print('plotting residuals')
     import matplotlib.pyplot as plt
     
     fig, ax = plt.subplots(1, len(models), figsize=(5*len(models), 5), sharex=True, sharey=True)
@@ -446,6 +445,5 @@ if __name__=='__main__':
     
     fig.tight_layout()
     fig.savefig('residuals.pdf', bbox_inches='tight')
-    fig.close()
 
     
