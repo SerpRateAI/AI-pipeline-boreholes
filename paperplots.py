@@ -12,9 +12,8 @@ import pandas as pd
 import openpyxl
 import numpy as np
 import matplotlib.colors as mcolors
-from catboost import CatBoostClassifier
 from sklearn.model_selection import train_test_split
-import sklearn.metrics as 
+import sklearn.metrics as metrics
 
 
 def import_dataset():
@@ -53,31 +52,31 @@ def plot_fig2(df):
     plots the raw data for the physical, chemical, and bio
     measurements made in the BA1B borehole.
     """
-   fig2_cols = ['Cell abundance (cells/g)',
-     'Mean dry electrical Resistivity (ohmm)',
-     'Bulk density (g/cm³)',
-     'AMS bulk susceptibility',
-     'LOI wt%',
-     'CO2 wt%',
-     'H20 wt%',
-     'CaCO3 calc',
-    '% of fractures',
-    'TOP_DEPTH',
-    'ALTERATION',
-    'PnS2_sum',
-     'PnL_sum',
-     'PnP3V_sum',
-     'PnP3H_sum',
-     'PnP4_sum',
-     'PnP6V_sum',
-     'FnS2_sum',
-     'FnL_sum',
-     'FnP3V_sum',
-     'FnP3H_sum',
-     'FnP4_sum',
-     'FnP6V_sum',
-    'Alteration_dummies_50%-90%',
-     'Alteration_dummies_>90%',]
+    fig2_cols = ['Cell abundance (cells/g)',
+         'Mean dry electrical Resistivity (ohmm)',
+         'Bulk density (g/cm³)',
+         'AMS bulk susceptibility',
+         'LOI wt%',
+         'CO2 wt%',
+         'H20 wt%',
+         'CaCO3 calc',
+        '% of fractures',
+        'TOP_DEPTH',
+        'ALTERATION',
+        'PnS2_sum',
+         'PnL_sum',
+         'PnP3V_sum',
+         'PnP3H_sum',
+         'PnP4_sum',
+         'PnP6V_sum',
+         'FnS2_sum',
+         'FnL_sum',
+         'FnP3V_sum',
+         'FnP3H_sum',
+         'FnP4_sum',
+         'FnP6V_sum',
+        'Alteration_dummies_50%-90%',
+         'Alteration_dummies_>90%',]
     
     connectivity = ['PnS2_sum',
      'PnL_sum',
@@ -97,6 +96,32 @@ def plot_fig2(df):
     fig, ax = plt.subplots(1, 11, figsize=(14, 7), sharey=True)
     
     y = fig2_df.TOP_DEPTH
+
+    # this creates the colors for the geology plot
+    geology_columns = ['UNIT_TYPE_Dunite',
+         'UNIT_TYPE_Fault rock',
+         'UNIT_TYPE_Gabbro',
+         'UNIT_TYPE_Harzburgite',
+         'UNIT_TYPE_Metagabbro',
+         'UNIT_TYPE_Other',
+        'TOP_DEPTH']
+    geo_df = df[geology_columns].copy()
+    geo_df.dropna(inplace=True)
+    
+    Zs = []
+    
+    for n, c in enumerate(geology_columns[:-1]):
+        n = n + 1
+        z = np.vstack(geo_df[c].values*n)
+        Zs.append(z)
+    
+    Z = np.zeros_like(z)
+    for z in Zs:
+        Z += z
+        
+    x = np.array([0, 1])
+    y = np.vstack(geo_df['TOP_DEPTH'].values)
+    xx, yy = np.meshgrid(x, y)
        
     ax[0].pcolormesh(xx, yy, Z[:-1], vmin=0, vmax=6, cmap='rainbow', shading='auto')
     ax[0].set_title('Geology', fontsize=8)
