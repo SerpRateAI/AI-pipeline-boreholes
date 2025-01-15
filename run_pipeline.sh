@@ -16,7 +16,7 @@ python smd.py
 
 # run catboost models
 echo "Running catboost models..."
-python catboost.py
+python meow.py
 
 # plot results
 echo "Plotting Results..."
