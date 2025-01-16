@@ -10,4 +10,20 @@ The core cuts images can be found here: https://www.icdp-online.org/projects/by-
 
 Go to Public Images and choose BA1B in the Cores row, the zip folder whould be around 180 Mo.
 
-Please ask for segmented images if needed.
+The segmented images are available here: https://drive.google.com/drive/folders/1fvtC4qP-yYlxWZGLyOqsKw76l6tssY-c?usp=sharing
+
+# Getting started
+
+to run the pipeline simply run
+
+```
+bash run_pipeline.sh
+```
+
+Assuming your data is in the folders this should run the pipeline and:
+
+1. calculate the SMD features
+2. run the ChatGPT text categorization if you have a provided API key stored in `api-key.txt`
+3. assemble the data set
+4. run the catboost models
+5. generate the figures from the paper
