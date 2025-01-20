@@ -14,6 +14,15 @@ conda activate aipipeline
 echo "SMD calculation running..."
 python smd.py
 
+# run GPT analysis
+if [[ -f "api-key.txt" ]]; then
+    echo "api-key.txt found. Running GPT summarizer..."
+    python GPT_extraction/gpt-summarizer.py
+else
+    echo "api-key.txt not found. Skipping GPT summarizer."
+fi
+
+
 # run catboost models
 echo "Running catboost models..."
 python meow.py
