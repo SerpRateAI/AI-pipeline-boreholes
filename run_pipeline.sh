@@ -8,6 +8,8 @@ set -o nounset
 set -o pipefail
 
 # Activate conda environment
+# change this to source from your directory
+source /Users/mnky9800n/anaconda3/etc/profile.d/conda.sh
 conda activate aipipeline
 
 # run SMD
