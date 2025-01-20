@@ -8,11 +8,22 @@ set -o nounset
 set -o pipefail
 
 # Activate conda environment
+# change this to source from your directory
+source /Users/mnky9800n/anaconda3/etc/profile.d/conda.sh
 conda activate aipipeline
 
 # run SMD
 echo "SMD calculation running..."
 python smd.py
+
+# run GPT analysis
+if [[ -f "api-key.txt" ]]; then
+    echo "api-key.txt found. Running GPT summarizer..."
+    python GPT_extraction/gpt-summarizer.py
+else
+    echo "api-key.txt not found. Skipping GPT summarizer."
+fi
+
 
 # run catboost models
 echo "Running catboost models..."
