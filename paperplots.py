@@ -17,6 +17,12 @@ import sklearn.metrics as metrics
 
 
 def import_dataset():
+    """
+    generates data set from the excel spreadsheet Dataset_BA1B.xlsx
+
+    Returns:
+        pandas.DataFrame: Dataset for the entire pipeline
+    """
     dataset_path = 'Datasets/Dataset_BA1B.xlsx'
     
     df = pd.read_excel(dataset_path)
@@ -30,10 +36,14 @@ def import_dataset():
     'TOP_DEPTH'
                       ]
     df.dropna(subset='TOP_DEPTH', inplace=True)
+    df.sort_values(subset='TOP_DEPTH', inplace=True)
 
     return df
 
 def plot_fig2_legend():
+    """
+    generates the legend for the figure 2 in the paper
+    """
     fig, ax = plt.subplots(figsize=(4,4))
     ax.pcolormesh(np.vstack([1, 2, 3, 4, 5, 6]), cmap='rainbow', vmin=0, vmax=6)
     ax.text(s='Dunite', x=0.1, y=0.25, fontsize=20)
@@ -48,9 +58,11 @@ def plot_fig2_legend():
     fig.savefig('geology_legend.pdf', bbox_inches='tight')
 
 def plot_fig2(df):
-    """
-    plots the raw data for the physical, chemical, and bio
-    measurements made in the BA1B borehole.
+    """generates figure 2 for the paper, figure 2 shows all of the calculated
+       and generated data from the paper. this saves the figure as a pdf.
+
+    Args:
+        df (pandas.DataFrame): this should be the pandas dataframe created from import_dataset()
     """
     fig2_cols = ['Cell abundance (cells/g)',
          'Mean dry electrical Resistivity (ohmm)',
@@ -182,8 +194,12 @@ def plot_fig2(df):
 
 
 def plot_fig3(df):
-    """
+    """generates figure 3 for the paper. This figure has all of the chatgpt
+       summarized keywords as columns in the paper and colors as to their 
+       depth locations
 
+    Args:
+        df (pandas.DataFrame): this should be the pandas dataframe created from import_dataset()
     """
     groups = [
         ['Veins', 'Serpentine vein', 'Carbonate veins', 'White veins', 'Green veins',
