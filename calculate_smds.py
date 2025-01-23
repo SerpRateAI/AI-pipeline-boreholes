@@ -12,8 +12,10 @@ In each dictionary, the polytope functions (s2, p3, p4, ..L, f2, f3, f4, fL) are
 The name of each dictionary shows the core image name.
 
 Usage:
-python calculate_smds.py --path_ROI_imgs D:\Hamed\SerpAIpipeline\data\cropped_ROIs --cpathPn Cpp_source_512\Cpp_source\Polytope --runtimePn C
-pp_source_512\runtime --outputPn Cpp_source_512\runtime\output --path_output D:\Hamed\SerpAIpipeline\smd_outputs_test
+
+python calculate_smds.py --path_ROI_imgs D:\Hamed\SerpAIpipeline\data\cropped_ROIs --cpathPn D:\Hamed\Serp
+AIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\Cpp_source\Polytope --runtimePn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\runtime -
+-outputPn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\runtime\output --path_output D:\Hamed\SerpAIpipeline\smd_outputs_test
 
 
 """
