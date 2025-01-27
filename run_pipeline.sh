@@ -12,7 +12,7 @@ conda activate aipipeline
 
 # run SMD
 echo "SMD calculation running..."
-python smd.py
+python calculate_smds_sum.py
 
 # run catboost models
 echo "Running catboost models..."

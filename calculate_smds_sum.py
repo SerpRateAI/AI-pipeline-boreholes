@@ -37,6 +37,11 @@ def parse_args():
 def calculate_sum():
 
     args = parse_args()
+    # if the output path for saving the results is not specified, save it in the Dataset folder
+    if args.path_output is None:
+        args.path_output =  'Datasets'
+        print(f'The results will be saved in {args.path_output}...')
+
     numpts = args.num_points
 
     ## I used the same column name as I see in the Dataset excel file you had. Just added a fracture fraction (but maybe you had it already)
@@ -89,6 +94,9 @@ def calculate_sum():
 
     df_smd = pd.DataFrame(my_data_dict)
     df_smd.to_csv(os.path.join(args.path_output, 'dataset_smd_sum.csv'), index= False)
+
+    ## check if the sum of smds have been already calculated and the columns exist in the dataset excel file
+    
 
 
 
