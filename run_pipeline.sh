@@ -8,16 +8,25 @@ set -o nounset
 set -o pipefail
 
 # Activate conda environment
-conda activate aipipeline
+# conda activate aipipeline
 
-# run SMD
-echo "SMD calculation running..."
-python calculate_smds_sum.py
+# Check if the CSV file exists
+CSV_FILE="Datasets/dataset_smd_sum.csv"  # Replace with the actual path to the CSV file
+if [ ! -f "$CSV_FILE" ]; then
+    echo "CSV file not found. Running SMD calculation..."
+    python calculate_smds_sum.py --path_smds "D:/Hamed/SerpAIpipeline/smd_outputs"
+else
+    echo "CSV file exists. Skipping SMD calculation."
+fi
 
-# run catboost models
-echo "Running catboost models..."
-python meow.py
+# # run SMD
+# echo "SMD calculation running..."
+# python calculate_smds_sum.py
 
-# plot results
-echo "Plotting Results..."
-python paperplots.py
+# # run catboost models
+# echo "Running catboost models..."
+# python meow.py
+
+# # plot results
+# echo "Plotting Results..."
+# python paperplots.py

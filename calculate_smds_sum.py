@@ -95,8 +95,44 @@ def calculate_sum():
     df_smd = pd.DataFrame(my_data_dict)
     df_smd.to_csv(os.path.join(args.path_output, 'dataset_smd_sum.csv'), index= False)
 
-    ## check if the sum of smds have been already calculated and the columns exist in the dataset excel file
+    ## check if the sum of smds have been already calculated and the columns exist in the dataset excel file.
+    ## then replace the values with new smd calulation results
+    path_dataset = r'D:\Hamed\SerpAIpipeline'
+    df_data = pd.read_csv(os.path.join(path_dataset, 'Dataset_BA1B.csv')) # update this to read xlsx file
+
+    columns_to_replace = [
+        'PnS2_sum',
+        'PnP3H_sum',
+        'PnP3V_sum',
+        'PnP4_sum',
+        'PnP6V_sum',
+        'PnL_sum',
+        'FnS2_sum',
+        'FnP3H_sum',
+        'FnP3V_sum',
+        'FnP4_sum',
+        'FnP6V_sum',
+        'FnL_sum']
     
+    if all(col in df_data.columns for col in columns_to_replace):
+        print("All columns exist!")
+    else:
+        print("Some columns are missing.")
+
+    # make a new column showing the image name that match the core names
+    df_data['image_name'] = df_data['SEGMENTATION'].str.extract(r'Results/([^/]+)/')
+
+    #to combine df_data with df_smd based on the image_name column
+    # The suffixes is used to handle column name conflicts when the two dataframes being merged have columns with the same name
+    # (other than the key column(s) used for the merge).
+    merged_df = pd.merge(df_data, df_smd, on='image_name', how='left', suffixes=('', '_smd'))
+    for col in columns_to_replace:
+        merged_df[col] = merged_df[f"{col}_smd"]
+        merged_df.drop(columns=[f"{col}_smd"], inplace=True)
+
+    merged_df.to_csv(os.path.join(args.path_output, 'Dataset_BA1B_updated.csv'))
+
+
 
 
 
