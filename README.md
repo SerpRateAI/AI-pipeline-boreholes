@@ -32,12 +32,33 @@ Assuming your data is in the folders this should run the pipeline and:
 ## SMD calculation on your own images
 If you perform SMD calcualtions on your images or similar dataset. Following scripts should be run one by one:
 
-Step 1 : Select region of interest (ROI) from segmented images for each core:
+**Step 1** : Select region of interest (ROI) from segmented images for each core:
 
 ```
 python ROI_selection.py --path_imgs D:\Hamed\SerpAIpipeline\data\core_
 images_all --image_size 512 --stride 128 --path_output D:\Hamed\SerpAIpipeline\data\cropped_test
 
+```
 This script reads the segmented images from 'path_imgs' which is the path to parent folder 'core_images_all' described above. ROIs are selected by sliding a window of size "image_size" over the images with a stride, and chooses the region with maximum fracture fraction. It saves the ROI images in each folder in "core_images_all" and also in the 'path_output' from user.
 
+**Step 2**: Calculate SMDs from ROI core images:
+Here, you can calculate all SMDs on your ROI images of size 512 by 512 pixels. if you have images with different size, cpp code in folder 'Cpp_source_512' should be recompiled with different parameters. see the docstring for more details.
+
 ```
+python calculate_smds.py --path_ROI_imgs D:\Hamed\SerpAIpipeline\data\cropped_ROIs --cpathPn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\Cpp_source\Polytope --runtimePn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\runtime -
+-outputPn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\runtime\output --path_output D:\Hamed\SerpAIpipeline\smd_outputs_test
+
+```
+This script saves a dictionary (as a pickle file .pkl) for each image in the output folder specified by user ('path_output').
+In each dictionary, the polytope functions (s2, p3, p4, ..L, f2, f3, f4, fL) are the keys and values are the probabilities at each distance r.
+The name of each dictionary shows the core image name.
+
+**Step 3**
+Calculate sum of first 50 points in SMD functions by running the following:
+
+```
+python calculate_smds_sum.py --path_smds D:\Hamed\SerpAIpipeline\smd_outputs --path_output D:\Hamed\SerpAI
+pipeline\smd_outputs_test
+
+```
+Here, the code goes to the 'path_smds' and read all smd pickle files (calculated and saved in the previous step). It then calculate the sum of the first 'num_points' these functions. The results will be saved in a csv file named 'dataset_smd_sum.csv' in the 'Dataset' folder. The script will optionally also update columns of 'Dataset_BA1B.xlsx' by replacing SMD columns. 
