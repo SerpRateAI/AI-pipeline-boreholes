@@ -10,23 +10,21 @@ set -o pipefail
 # Activate conda environment
 # conda activate aipipeline
 
-# Check if the CSV file exists
-CSV_FILE="Datasets/dataset_smd_sum.csv"  # Replace with the actual path to the CSV file
-if [ ! -f "$CSV_FILE" ]; then
-    echo "CSV file not found. Running SMD calculation..."
-    python calculate_smds_sum.py --path_smds "D:/Hamed/SerpAIpipeline/smd_outputs"
-else
-    echo "CSV file exists. Skipping SMD calculation."
-fi
+# # Check if the CSV file exists
+# CSV_FILE="Datasets/dataset_smd_sum.csv"  # Replace this with path to the csv file containing smd sum values if different
+# if [ ! -f "$CSV_FILE" ]; then
+#     echo "CSV file not found. Running SMD calculation..."
+#     # replace --path_smds with the path you've saved the smd pickle files
+#     python calculate_smds_sum.py --path_smds "D:/Hamed/SerpAIpipeline/smd_outputs"
+# else
+#     echo "CSV file exists. Skipping SMD calculation."
+# fi
 
-# # run SMD
-# echo "SMD calculation running..."
-# python calculate_smds_sum.py
 
-# # run catboost models
-# echo "Running catboost models..."
-# python meow.py
+# run catboost models
+echo "Running catboost models..."
+python meow.py
 
-# # plot results
-# echo "Plotting Results..."
-# python paperplots.py
+# plot results
+echo "Plotting Results..."
+python paperplots.py

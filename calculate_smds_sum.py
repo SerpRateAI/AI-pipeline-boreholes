@@ -30,7 +30,7 @@ def parse_args():
                        help='Path to the folder containing all dictionaries calculated with calculate_smds.py')
   parser.add_argument('--num_points', type = int, default= 50, help = 'Numnber of points to sum in the smd')
 
-  parser.add_argument('--path_output', type =str, help= 'Path to the output folder to save dictinary containing the SMDs')
+  parser.add_argument('--path_output', type =str, help= 'Path to save csv file containing sum smds values')
   
   return parser.parse_args()
 
@@ -40,7 +40,7 @@ def calculate_sum():
     # if the output path for saving the results is not specified, save it in the Dataset folder
     if args.path_output is None:
         args.path_output =  'Datasets'
-        print(f'The results will be saved in {args.path_output}...')
+        print(f'The results will be saved in {args.path_output} path as Dataset_BA1B_updated.xlsx')
 
     numpts = args.num_points
 
@@ -97,8 +97,10 @@ def calculate_sum():
 
     ## check if the sum of smds have been already calculated and the columns exist in the dataset excel file.
     ## then replace the values with new smd calulation results
-    path_dataset = r'D:\Hamed\SerpAIpipeline'
-    df_data = pd.read_csv(os.path.join(path_dataset, 'Dataset_BA1B.csv')) # update this to read xlsx file
+    # path_dataset = r'D:\Hamed\SerpAIpipeline'
+    
+    # df_data = pd.read_csv(os.path.join(path_dataset, 'Dataset_BA1B.csv')) # update this to read xlsx file
+    df_data = pd.read_excel(r'Datasets\Dataset_BA1B.xlsx')
 
     columns_to_replace = [
         'PnS2_sum',
@@ -116,6 +118,7 @@ def calculate_sum():
     
     if all(col in df_data.columns for col in columns_to_replace):
         print("All columns exist!")
+        print("Updating the dataset with new smd values")
     else:
         print("Some columns are missing.")
 
@@ -130,7 +133,8 @@ def calculate_sum():
         merged_df[col] = merged_df[f"{col}_smd"]
         merged_df.drop(columns=[f"{col}_smd"], inplace=True)
 
-    merged_df.to_csv(os.path.join(args.path_output, 'Dataset_BA1B_updated.csv'))
+    # merged_df.to_csv(os.path.join(args.path_output, 'Dataset_BA1B_updated.csv'))
+    merged_df.to_excel(os.path.join(args.path_output, 'Dataset_BA1B_updated.xlsx'))
 
 
 

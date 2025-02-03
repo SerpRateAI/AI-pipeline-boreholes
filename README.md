@@ -61,4 +61,4 @@ python calculate_smds_sum.py --path_smds D:\Hamed\SerpAIpipeline\smd_outputs --p
 pipeline\smd_outputs_test
 
 ```
-Here, the code goes to the 'path_smds' and read all smd pickle files (calculated and saved in the previous step). It then calculate the sum of the first 'num_points' these functions. The results will be saved in a csv file named 'dataset_smd_sum.csv' in the 'Dataset' folder. The script will optionally also update columns of 'Dataset_BA1B.xlsx' by replacing SMD columns. 
+Here, the code goes to the 'path_smds' and read all smd pickle files (calculated and saved in the previous step). It then calculate the sum of the first 'num_points' these functions. The results will be saved in a csv file named 'dataset_smd_sum.csv' in the 'Dataset' folder. The script will create a new spreadsheet named 'Dataset_BA1B_updated.xlsx' with updated SMD sume values. Use this file as input in running meow.py 
