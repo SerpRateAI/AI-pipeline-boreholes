@@ -10,8 +10,10 @@ The core cuts images can be found here: https://www.icdp-online.org/projects/by-
 
 Go to Public Images and choose BA1B in the Cores row, the zip folder whould be around 180 Mo.
 
-The segmented images are available here: https://drive.google.com/drive/folders/1fvtC4qP-yYlxWZGLyOqsKw76l6tssY-c?usp=sharing
+The segmented images are available in the following link. please download the folder "core_images_all" where you can find images for all core images:
+https://drive.google.com/drive/folders/1fvtC4qP-yYlxWZGLyOqsKw76l6tssY-c?usp=sharing
 
+In this parent folder, you can find greyscale and segmented images for all the core sections. Tif images with names ending with "_Simple Segmentation_3" are the segmented images used for image analysis and calculation of Statistical microstructure descriptors (SMDs).
 # Getting started
 
 to run the pipeline simply run
