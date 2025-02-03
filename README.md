@@ -42,7 +42,7 @@ images_all --image_size 512 --stride 128 --path_output D:\Hamed\SerpAIpipeline\d
 This script reads the segmented images from 'path_imgs' which is the path to parent folder 'core_images_all' described above. ROIs are selected by sliding a window of size "image_size" over the images with a stride, and chooses the region with maximum fracture fraction. It saves the ROI images in each folder in "core_images_all" and also in the 'path_output' from user.
 
 **Step 2**: Calculate SMDs from ROI core images:
-Here, you can calculate all SMDs on your ROI images of size 512 by 512 pixels. if you have images with different size, cpp code in folder 'Cpp_source_512' should be recompiled with different parameters. see the docstring for more details.
+Here, you can calculate all SMDs on your ROI images of size 512 by 512 pixels. if you have images with different size, cpp code in folder 'Cpp_source_512' should be recompiled with different parameters. See the docstring for more detail.
 
 ```
 python calculate_smds.py --path_ROI_imgs D:\Hamed\SerpAIpipeline\data\cropped_ROIs --cpathPn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\Cpp_source\Polytope --runtimePn D:\Hamed\SerpAIpipeline\SerpAI_Github\AI-pipeline-boreholes\Cpp_source_512\runtime -
@@ -53,7 +53,7 @@ This script saves a dictionary (as a pickle file .pkl) for each image in the out
 In each dictionary, the polytope functions (s2, p3, p4, ..L, f2, f3, f4, fL) are the keys and values are the probabilities at each distance r.
 The name of each dictionary shows the core image name.
 
-**Step 3**
+**Step 3**:
 Calculate sum of first 50 points in SMD functions by running the following:
 
 ```

@@ -134,8 +134,5 @@ def calculate_sum():
 
 
 
-
-
-
 if __name__=="__main__":
     calculate_sum()
