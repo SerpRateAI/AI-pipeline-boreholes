@@ -125,6 +125,7 @@ stack-data==0.6.3
 tenacity==8.2.3
 terminado==0.18.0
 threadpoolctl==3.2.0
+tifffile==2019.7.26.2
 tinycss2==1.2.1
 tornado==6.4
 tqdm==4.66.1
