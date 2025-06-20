@@ -337,11 +337,12 @@ if __name__=='__main__':
      'GRAINSIZE_Fine grained',
      'GRAINSIZE_Medium grained',
      'GRAINSIZE_Microcrystalline',
-     'GRAINSIZE2_Coarse grained',
-     'GRAINSIZE2_Cryptocrystalline',
-     'GRAINSIZE2_Fine grained',
-     'GRAINSIZE2_Medium grained',
-     'GRAINSIZE2_Pegmatitic',]
+     # 'GRAINSIZE2_Coarse grained',
+     # 'GRAINSIZE2_Cryptocrystalline',
+     # 'GRAINSIZE2_Fine grained',
+     # 'GRAINSIZE2_Medium grained',
+     # 'GRAINSIZE2_Pegmatitic',
+              ]
     print('---catboost for geology---')
     geo = meow_reg(df=df, X_cols=geology, Y_col='Bulk density (g/cm³)')
     
@@ -424,24 +425,37 @@ if __name__=='__main__':
 
     print('plotting residuals')
     import matplotlib.pyplot as plt
+    import numpy as np
+
+    plt.rcParams['font.size'] = 20
     
-    fig, ax = plt.subplots(1, len(models), figsize=(5*len(models), 5), sharex=True, sharey=True)
+    # fig, ax = plt.subplots(1, len(models), figsize=(10*len(models), 10), sharex=True, sharey=True)
+    fig, ax = plt.subplots(2, len(models)//2, figsize=(20, 15), sharex=True, sharey=True)
+
+    ax = ax.flatten()
+    print(len(ax), ax)
     
-    ax[0].set_ylabel('Predicted Bulk Density')
+    ax[0].set_ylabel('Predicted Bulk Density', fontsize=30)
+    ax[3].set_ylabel('Predicted Bulk Density', fontsize=30)
     for a in ax:
-        a.set_xlabel('True Bulk Density')
-    ax[0].set_title('Chemistry and Biology')
-    ax[1].set_title('Fractures')
-    ax[2].set_title('Geology')
-    ax[3].set_title('Physics')
-    ax[4].set_title('ChatGPT')
-    ax[5].set_title('Other')
+        a.set_xlabel('True Bulk Density', fontsize=30)
+    ax[0].set_title('Chemistry and Biology', fontsize=30)
+    ax[1].set_title('Fractures', fontsize=30)
+    ax[2].set_title('Geology', fontsize=30)
+    ax[3].set_title('Physics', fontsize=30)
+    ax[4].set_title('ChatGPT', fontsize=30)
+    ax[5].set_title('Other', fontsize=30)
     
     ytrue = df['Bulk density (g/cm³)'].values
     
     for n, a in enumerate(ax):
+        letters = 'abcdef'
         ypred = models[n].predict(df[vars[n]])
-        a.scatter(ytrue, ypred)
+        a.scatter(ytrue, ypred, marker='.', color='black')
+        a.text(s=f'{letters[n]}', x=2.45, y=2.95, bbox=dict(facecolor='none', edgecolor='black', pad=10), fontsize=30)
+        a.plot((1, 4), (1, 4), linestyle='--', zorder=0, color='black', alpha=0.5)
+        a.set_xlim(2.39, 3.05)
+        a.set_ylim(2.39, 3.05)
     
     fig.tight_layout()
     fig.savefig('residuals.pdf', bbox_inches='tight')
