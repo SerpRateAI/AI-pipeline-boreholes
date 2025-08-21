@@ -223,8 +223,27 @@ def import_dataset():
     return df
 
 def meow_reg(df, X_cols, Y_col):
-    """
-    trains catboost regressor for data 
+    """trains a catboost regression model that predicts Y_col based on X_col
+
+       the training data is set to a default 20% training size
+
+       Uses default values for training:
+       iterations=1000
+       learning_rate=0.1
+       depth=6
+       loss_function='RMSE'
+
+       catboost uses early stopping to prevent overfitting and early stopping rounds is set to 10.
+
+       This also prints to output the R2 score and RMSE of the model.
+
+    Args:
+        df (pandas.DataFrame): this should be the pandas dataframe created from import_dataset()
+        X_cols (list): list of column headers that count for the training variables for the catboost model
+        Y_col (str): _description_
+
+    Returns:
+        catboost.CatBoostRegressor: returns trained CatBoostRegressor estimator
     """
     # print(X_cols)
 
